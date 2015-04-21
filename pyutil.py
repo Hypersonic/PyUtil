@@ -17,3 +17,18 @@ def every_nth(itr, n=8, offset=0):
         Returns a generator
     """
     return (group[offset] for group in groups_of(itr, n))
+
+def window(itr, n=8):
+    """ Returns a sliding window over itr, giving access to
+        n consecutive elements at a time.
+
+        n defaults to 8
+
+        Returns a generator
+    """
+    prevs = []
+    for item in itr:
+        prevs.append(item)
+        if len(prevs) == n:
+            yield prevs
+            prevs = prevs[1:]
