@@ -32,3 +32,9 @@ def window(itr, n=8):
         if len(prevs) == n:
             yield prevs
             prevs = prevs[1:]
+
+def load_file(filename):
+    """ Open filename and return its contents as a string
+    """
+    with open(filename) as f:
+        return f.read()
