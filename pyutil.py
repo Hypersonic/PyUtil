@@ -33,6 +33,11 @@ def window(itr, n=8):
             yield prevs
             prevs = prevs[1:]
 
+def join(s, joiner=""):
+    """ Sugar to join strings in a more sensible order
+    """
+    return joiner.join(s)
+
 def load_file(filename):
     """ Open filename and return its contents as a string
     """
