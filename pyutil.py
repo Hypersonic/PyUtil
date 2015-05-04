@@ -1,4 +1,5 @@
 from itertools import izip, combinations
+from string import printable
 
 def groups_of(itr, n=8):
     """ Return groups of n consecutive elements from itr
@@ -51,7 +52,7 @@ def save_file(filename, contents):
     with open(filename, 'w') as f:
         f.write(contents)
 
-def brute_force(up_to_len, alphabet="abcdefghijlkmnopqrstuvwxyz"):
+def brute_force(up_to_len, alphabet=printable):
     """ Generate all combinations of an alphabet,
         to up_to_len long combinations
 
@@ -60,3 +61,22 @@ def brute_force(up_to_len, alphabet="abcdefghijlkmnopqrstuvwxyz"):
     for i in xrange(up_to_len + 1):
         for x in combinations(alphabet, i):
             yield join(x, "")
+
+
+class UFCS(object):
+    """ Returns a D-style UFCS-able object
+        Caveat: You must call .data on the last element
+        of the chain to get the output
+    """
+    def __init__(self, data):
+        self.data = data
+        self.func = lambda *args, **kwargs: None
+    def __getattr__(self, func_name):
+        self.func = eval(func_name)
+        return self
+    def __call__(self, *args, **kwargs):
+        if self.func is not None:
+            return UFCS(self.func(self.data, *args, **kwargs))
+        else:
+            return UFCS(self.data)
+
