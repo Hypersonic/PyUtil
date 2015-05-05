@@ -70,19 +70,14 @@ class Chain(object):
     """
     def __init__(self, data):
         self.data = data
-        self.func_name = None 
     def __getattr__(self, func_name):
-        self.func_name = func_name
-        return self
-    def __call__(self, *args, **kwargs):
-        if self.func_name is not None:
+        try:
             # If the function exists as a member function, use that
-            if self.func_name in self.data.__class__.__dict__:
-                func = self.data.__class__.__dict__[self.func_name]
+            if func_name in self.data.__class__.__dict__:
+                func = self.data.__class__.__dict__[func_name]
             # Otherwise, use it as the first argument to a global function
             else:
-                func = eval(self.func_name) # we have to use eval for this q.q
-            return Chain(func(self.data, *args, **kwargs))
-        else:
-            return Chain(self.data)
-
+                func = eval(func_name) # we have to use eval for this q.q
+            return lambda *args, **kwargs: Chain(func(self.data, *args, **kwargs))
+        except NameError, e:
+            return getattr(self.data, func_name)
