@@ -63,20 +63,26 @@ def brute_force(up_to_len, alphabet=printable):
             yield join(x, "")
 
 
-class UFCS(object):
+class Chain(object):
     """ Returns a D-style UFCS-able object
         Caveat: You must call .data on the last element
         of the chain to get the output
     """
     def __init__(self, data):
         self.data = data
-        self.func = lambda *args, **kwargs: None
+        self.func_name = None 
     def __getattr__(self, func_name):
-        self.func = eval(func_name)
+        self.func_name = func_name
         return self
     def __call__(self, *args, **kwargs):
-        if self.func is not None:
-            return UFCS(self.func(self.data, *args, **kwargs))
+        if self.func_name is not None:
+            # If the function exists as a member function, use that
+            if self.func_name in self.data.__class__.__dict__:
+                func = self.data.__class__.__dict__[self.func_name]
+            # Otherwise, use it as the first argument to a global function
+            else:
+                func = eval(self.func_name) # we have to use eval for this q.q
+            return Chain(func(self.data, *args, **kwargs))
         else:
-            return UFCS(self.data)
+            return Chain(self.data)
 
