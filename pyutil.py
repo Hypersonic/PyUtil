@@ -85,3 +85,23 @@ class Chain(object):
         return 'Chain(' + repr(self.data) + ')'
     def __str__(self):
         return str(self.data)
+
+def mapR(itr, func):
+    """ Same as `map`, but with the arguments reversed for use in a `Chain`
+    """
+    return [func(i) for i in itr]
+
+def imapR(itr, func):
+    """ Same as `imap`, but with the arguments reversed for use in a `Chain`
+    """
+    return (func(i) for i in itr)
+
+def filterR(itr, pred):
+    """ Same as `filter`, but with the arguments reversed for use in a `Chain`
+    """
+    return [i for i in itr if pred(i)]
+
+def ifilterR(itr, pred):
+    """ Same as `ifilter`, but with the arguments reversed for use in a `Chain`
+    """
+    return (i for i in itr if pred(i))
