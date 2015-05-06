@@ -81,3 +81,7 @@ class Chain(object):
             return lambda *args, **kwargs: Chain(func(self.data, *args, **kwargs))
         except NameError, e:
             return getattr(self.data, func_name)
+    def __repr__(self):
+        return 'Chain(' + repr(self.data) + ')'
+    def __str__(self):
+        return str(self.data)
