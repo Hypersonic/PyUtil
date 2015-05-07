@@ -86,6 +86,10 @@ class Chain(object):
     def __str__(self):
         return str(self.data)
     def __iter__(self):
+        """ Return an iterator over the data in a chain
+            The Chain-ness is transitive, meaning all elements inside the chain
+            get wrapped in a Chain
+        """
         return (Chain(x) for x in self.data)
 
 def mapR(itr, func):
