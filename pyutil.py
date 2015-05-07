@@ -85,6 +85,8 @@ class Chain(object):
         return 'Chain(' + repr(self.data) + ')'
     def __str__(self):
         return str(self.data)
+    def __iter__(self):
+        return (Chain(x) for x in self.data)
 
 def mapR(itr, func):
     """ Same as `map`, but with the arguments reversed for use in a `Chain`
