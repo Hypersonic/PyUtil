@@ -111,3 +111,9 @@ def ifilterR(itr, pred):
     """ Same as `ifilter`, but with the arguments reversed for use in a `Chain`
     """
     return (i for i in itr if pred(i))
+
+def reduceR(itr, func, initial=0):
+    """ Same as `reduce`, but with the arguments reversed
+    (sequence first) for use in a `Chain`
+    """
+    return reduce(func, itr, intial)
