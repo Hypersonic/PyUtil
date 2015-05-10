@@ -1,3 +1,6 @@
+from itertools import izip, combinations
+from string import printable
+
 def groups_of(itr, n=8):
     """ Return groups of n consecutive elements from itr
         n defaults to 8
