@@ -21,13 +21,3 @@ def save_file(filename, contents):
     with open(filename, 'w') as f:
         f.write(contents)
 
-def brute_force(up_to_len, alphabet=printable):
-    """ Generate all combinations of an alphabet,
-        to up_to_len long combinations
-
-        Returns a generator
-    """
-    for i in xrange(up_to_len + 1):
-        for x in combinations(alphabet, i):
-            yield join(x, "")
-

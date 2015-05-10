@@ -30,3 +30,14 @@ def window(itr, n=8):
         if len(prevs) == n:
             yield prevs
             prevs = prevs[1:]
+
+def brute_force(up_to_len, alphabet=printable):
+    """ Generate all combinations of an alphabet,
+        to up_to_len long combinations
+
+        Returns a generator
+    """
+    for i in xrange(up_to_len + 1):
+        for x in combinations(alphabet, i):
+            yield join(x, "")
+
