@@ -14,3 +14,9 @@ def caesar(s, n=1):
             continue
         out += chr((ord(c) - ord(base) + n) % 26 + ord(base))
     return out
+
+def replace(s, mapping):
+    out = ""
+    for c in s:
+        out += mapping.get(c, c)
+    return out
