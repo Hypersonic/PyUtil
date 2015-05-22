@@ -43,8 +43,3 @@ def brute_force(up_to_len, alphabet=printable):
     for i in xrange(up_to_len + 1):
         for x in combinations(alphabet, i):
             yield join(x, "")
-
-def join(itr, joiner=""):
-    """ Sugar to join strings in a more sensible order
-    """
-    return joiner.join(itr)

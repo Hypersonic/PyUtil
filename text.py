@@ -20,3 +20,8 @@ def substitute(s, mapping):
     for c in s:
         out += mapping.get(c, c)
     return out
+
+def join(itr, joiner=""):
+    """ Sugar to join strings in a more sensible order
+    """
+    return joiner.join(itr)
