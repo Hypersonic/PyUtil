@@ -19,7 +19,8 @@ def repl(prompt=">>> "):
         running[0] = False
     print "Starting repl, call close_repl() to exit"
     while running[0]:
+        i = raw_input(prompt)
         try:
-            print(eval(raw_input(prompt)))
-        except e:
-            pass
+            print(eval(i))
+        except:
+            print "err:",i
