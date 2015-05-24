@@ -1,4 +1,5 @@
 from itertools import izip, combinations
+from text import join
 from string import printable
 
 def groups_of(itr, n=8):
