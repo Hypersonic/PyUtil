@@ -51,4 +51,4 @@ def reduceR(itr, func, initial=0):
     """ Same as `reduce`, but with the arguments reversed
     (sequence first) for use in a `Chain`
     """
-    return reduce(func, itr, intial)
+    return reduce(func, itr, initial)
