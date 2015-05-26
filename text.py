@@ -16,10 +16,13 @@ def caesar(s, n=1):
     return out
 
 def substitute(s, mapping):
-    out = ""
+    """ Substitute any keys in mapping with their value
+        Keys must be single characters, or they will not be substituted
+    """
+    out = []
     for c in s:
-        out += mapping.get(c, c)
-    return out
+        out.append(mapping.get(c, c))
+    return "".join(out)
 
 def join(itr, joiner=""):
     """ Sugar to join strings in a more sensible order
