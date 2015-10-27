@@ -35,6 +35,13 @@ def window(itr, n=8):
             yield prevs
             prevs = prevs[1:]
 
+def take(itr, n):
+    """ Take off the first n items of an iterator, and return them.
+
+        Returns a list
+    """
+    return [b for a,b in zip(range(n), itr)]
+
 def brute_force(up_to_len, alphabet=printable):
     """ Generate all combinations of an alphabet,
         to up_to_len long combinations
